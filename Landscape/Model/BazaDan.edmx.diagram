@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e0a6d48e63ca4229817386b2e3bc738f" Name="Diagram1">
+        <EntityTypeShape EntityType="LandscapeDesignModel.Clients" Width="1.5" PointX="0.75" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="LandscapeDesignModel.Equipment" Width="1.5" PointX="11" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="LandscapeDesignModel.EquipmentUsage" Width="1.5" PointX="13.25" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LandscapeDesignModel.Invoices" Width="1.5" PointX="5.25" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LandscapeDesignModel.InvoiceStatuses" Width="1.5" PointX="3" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="LandscapeDesignModel.Materials" Width="1.5" PointX="6" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LandscapeDesignModel.Orders" Width="1.5" PointX="3" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="LandscapeDesignModel.OrdersPlantsMaterials" Width="1.5" PointX="8.25" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LandscapeDesignModel.OrderStatuses" Width="1.5" PointX="0.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="LandscapeDesignModel.PaymentMethods" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="LandscapeDesignModel.Payments" Width="1.5" PointX="5.25" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LandscapeDesignModel.Plants" Width="1.5" PointX="6" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LandscapeDesignModel.PlantTypes" Width="1.5" PointX="3.75" PointY="17.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LandscapeDesignModel.Projects" Width="1.5" PointX="5.25" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LandscapeDesignModel.ProjectStatuses" Width="1.5" PointX="3" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LandscapeDesignModel.Reviews" Width="1.5" PointX="8.25" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LandscapeDesignModel.Roles" Width="1.5" PointX="0.75" PointY="21" IsExpanded="true" />
+        <EntityTypeShape EntityType="LandscapeDesignModel.StatusesEquipment" Width="1.5" PointX="8.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LandscapeDesignModel.Tasks" Width="1.5" PointX="7.5" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LandscapeDesignModel.TypeEquipment" Width="1.5" PointX="8.75" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LandscapeDesignModel.Workers" Width="1.5" PointX="3" PointY="19.5" IsExpanded="true" />
+        <AssociationConnector Association="LandscapeDesignModel.Orders_IDClient_fkey" ManuallyRouted="false" />
+        <AssociationConnector Association="LandscapeDesignModel.Payments_IDClient_fkey" ManuallyRouted="false" />
+        <AssociationConnector Association="LandscapeDesignModel.Reviews_IDClient_fkey" ManuallyRouted="false" />
+        <AssociationConnector Association="LandscapeDesignModel.Equipment_IDStatusEquipment_fkey" ManuallyRouted="false" />
+        <AssociationConnector Association="LandscapeDesignModel.Equipment_IDTypeEquipment_fkey" ManuallyRouted="false" />
+        <AssociationConnector Association="LandscapeDesignModel.EquipmentUsage_IDEquipment_fkey" ManuallyRouted="false" />
+        <AssociationConnector Association="LandscapeDesignModel.EquipmentUsage_IDWorker_fkey" ManuallyRouted="false" />
+        <AssociationConnector Association="LandscapeDesignModel.Invoices_IDInvoiceStatus_fkey" ManuallyRouted="false" />
+        <AssociationConnector Association="LandscapeDesignModel.Invoices_IDOrder_fkey" ManuallyRouted="false" />
+        <AssociationConnector Association="LandscapeDesignModel.OrdersPlantsMaterials_IDMaterial_fkey" ManuallyRouted="false" />
+        <AssociationConnector Association="LandscapeDesignModel.Orders_IDOrderStatus_fkey" ManuallyRouted="false" />
+        <AssociationConnector Association="LandscapeDesignModel.OrdersPlantsMaterials_IDOrder_fkey" ManuallyRouted="false" />
+        <AssociationConnector Association="LandscapeDesignModel.Payments_IDOrder_fkey" ManuallyRouted="false" />
+        <AssociationConnector Association="LandscapeDesignModel.Projects_IDOrder_fkey" ManuallyRouted="false" />
+        <AssociationConnector Association="LandscapeDesignModel.Reviews_IDOrder_fkey" ManuallyRouted="false" />
+        <AssociationConnector Association="LandscapeDesignModel.OrdersPlantsMaterials_IDPlant_fkey" ManuallyRouted="false" />
+        <AssociationConnector Association="LandscapeDesignModel.Payments_IDPaymentMethod_fkey" ManuallyRouted="false" />
+        <AssociationConnector Association="LandscapeDesignModel.Plants_IDPlantType_fkey" ManuallyRouted="false" />
+        <AssociationConnector Association="LandscapeDesignModel.Projects_IDProjectStatus_fkey" ManuallyRouted="false" />
+        <AssociationConnector Association="LandscapeDesignModel.Projects_IDWorkers_fkey" ManuallyRouted="false" />
+        <AssociationConnector Association="LandscapeDesignModel.Tasks_IDProject_fkey" ManuallyRouted="false" />
+        <AssociationConnector Association="LandscapeDesignModel.Workers_IDRole_fkey" ManuallyRouted="false" />
+        <AssociationConnector Association="LandscapeDesignModel.Tasks_IDWorkers_fkey" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

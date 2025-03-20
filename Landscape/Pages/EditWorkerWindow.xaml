@@ -1,0 +1,63 @@
+﻿<Window x:Class="Landscape.Pages.EditWorkerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:Landscape.Pages"
+        Title="Редактировать сотрудника" Height="400" Width="600"
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Grid Background="#F9F9F9">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Text="Имя:" FontWeight="Bold" Margin="5" Grid.Row="0" Grid.Column="0"/>
+        <TextBox Name="FirstNameTextBox" Margin="5" FontSize="14" Padding="10" Background="#FFFFFF" BorderBrush="#B0BEC5" BorderThickness="1" Grid.Row="0" Grid.Column="1"/>
+
+        <TextBlock Text="Отчество:" FontWeight="Bold" Margin="5" Grid.Row="0" Grid.Column="2"/>
+        <TextBox Name="SecondNameTextBox" Margin="5" FontSize="14" Padding="10" Background="#FFFFFF" BorderBrush="#B0BEC5" BorderThickness="1" Grid.Row="0" Grid.Column="3"/>
+
+        <TextBlock Text="Фамилия:" FontWeight="Bold" Margin="5" Grid.Row="1" Grid.Column="0"/>
+        <TextBox Name="LastNameTextBox" Margin="5" FontSize="14" Padding="10" Background="#FFFFFF" BorderBrush="#B0BEC5" BorderThickness="1" Grid.Row="1" Grid.Column="1"/>
+
+        <TextBlock Text="Телефон:" FontWeight="Bold" Margin="5" Grid.Row="1" Grid.Column="2"/>
+        <TextBox Name="PhoneNumberTextBox" Margin="5" FontSize="14" Padding="10" Background="#FFFFFF" BorderBrush="#B0BEC5" BorderThickness="1" Grid.Row="1" Grid.Column="3"/>
+
+        <TextBlock Text="Email:" FontWeight="Bold" Margin="5" Grid.Row="2" Grid.Column="0"/>
+        <TextBox Name="EmailTextBox" Margin="5" FontSize="14" Padding="10" Background="#FFFFFF" BorderBrush="#B0BEC5" BorderThickness="1" Grid.Row="2" Grid.Column="1"/>
+
+        <TextBlock Text="Адрес:" FontWeight="Bold" Margin="5" Grid.Row="2" Grid.Column="2"/>
+        <TextBox Name="AddressTextBox" Margin="5" FontSize="14" Padding="10" Background="#FFFFFF" BorderBrush="#B0BEC5" BorderThickness="1" Grid.Row="2" Grid.Column="3"/>
+
+        <TextBlock Text="Дата рождения:" FontWeight="Bold" Margin="5" Grid.Row="3" Grid.Column="0"/>
+        <DatePicker Name="BirthdayDatePicker" Margin="5" FontSize="14" Padding="10" Background="#FFFFFF" BorderBrush="#B0BEC5" BorderThickness="1" Grid.Row="3" Grid.Column="1"/>
+
+        <TextBlock Text="Серия паспорта:" FontWeight="Bold" Margin="5" Grid.Row="3" Grid.Column="2"/>
+        <TextBox Name="PassportSeriaTextBox" Margin="5" FontSize="14" Padding="10" Background="#FFFFFF" BorderBrush="#B0BEC5" BorderThickness="1" Grid.Row="3" Grid.Column="3"/>
+
+        <TextBlock Text="Номер паспорта:" FontWeight="Bold" Margin="5" Grid.Row="4" Grid.Column="0"/>
+        <TextBox Name="PassportNumberTextBox" Margin="5" FontSize="14" Padding="10" Background="#FFFFFF" BorderBrush="#B0BEC5" BorderThickness="1" Grid.Row="4" Grid.Column="1"/>
+
+        <TextBlock Text="Стаж:" FontWeight="Bold" Margin="5" Grid.Row="4" Grid.Column="2"/>
+        <TextBox Name="ExperienceYearsTextBox" Margin="5" FontSize="14" Padding="10" Background="#FFFFFF" BorderBrush="#B0BEC5" BorderThickness="1" Grid.Row="4" Grid.Column="3"/>
+        <TextBlock Text="Роль:" FontWeight="Bold" Margin="5" Grid.Row="5" Grid.Column="0"/>
+        <ComboBox Name="RoleComboBox" Margin="5,5,5,79" FontSize="14" Padding="10" Background="#FFFFFF" BorderBrush="#B0BEC5" BorderThickness="1" Grid.Row="5" Grid.Column="1"/>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,40,0,0" Grid.Row="5" Grid.ColumnSpan="4">
+            <Button Content="Сохранить" Name="SaveButton" Width="120" Height="40" Click="SaveButton_Click" Margin="10" FontSize="14" Background="#4CAF50" Foreground="White" BorderBrush="#388E3C" BorderThickness="1"/>
+            <Button Content="Удалить" Name="DeleteButton" Width="120" Height="40" Click="DeleteButton_Click" Margin="10" FontSize="14" Background="#F44336" Foreground="White" BorderBrush="#D32F2F" BorderThickness="1"/>
+        </StackPanel>
+    </Grid>
+</Window>

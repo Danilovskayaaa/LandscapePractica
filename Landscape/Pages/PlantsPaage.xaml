@@ -1,0 +1,70 @@
+﻿<Page x:Class="Landscape.Pages.PlantsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:Landscape.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="900"
+      Title="Растения">
+
+    <Grid Background="#F5F5F5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Верхняя панель -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
+            <Button Content="➕ Добавить" Click="Button_Click"
+                    Padding="10" FontSize="14"
+                    Background="#4CAF50" Foreground="White" BorderBrush="{x:Null}"
+                    Width="120" Height="40" Margin="5" Cursor="Hand"/>
+            <Button Content="🔄 Обновить" Click="UpdateList_Click"
+                    Padding="10" FontSize="14"
+                    Background="#2196F3" Foreground="White" BorderBrush="{x:Null}"
+                    Width="120" Height="40" Margin="5" Cursor="Hand"/>
+        </StackPanel>
+
+        <!-- Список растений -->
+        <ListView Name="LViewPlants" Grid.Row="1"
+                  ItemsSource="{Binding Plantss}" 
+                  MouseDoubleClick="PlantsListView_MouseDoubleClick"
+                  Background="Transparent" BorderThickness="0"
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border Background="White" Padding="10" Margin="10" 
+                            Width="250" Height="Auto" CornerRadius="15"
+                            
+                            BorderBrush="#ddd" BorderThickness="1"
+                            Effect="{DynamicResource MaterialDesignShadow}">
+                        <StackPanel>
+                            <TextBlock Text="{Binding Name}" FontSize="18" FontWeight="Bold" Foreground="#333" HorizontalAlignment="Center"/>
+
+                            <!-- Смайлики и подписи -->
+                            <StackPanel Margin="10">
+                                <TextBlock Text="🌿 Условия роста" FontWeight="Bold" Foreground="#666"/>
+                                <TextBlock Text="{Binding GrowthConditions}" Foreground="#222"/>
+
+                                <TextBlock Text="🌱 Тип растения" FontWeight="Bold" Foreground="#666"/>
+                                <TextBlock Text="{Binding PlantTypes.PlantType}" Foreground="#222"/>
+
+                                <TextBlock Text="💲 Цена за единицу" FontWeight="Bold" Foreground="#666"/>
+                                <TextBlock Text="{Binding PricePerUnit, StringFormat='Цена: {0:C}'}" Foreground="#222"/>
+                            </StackPanel>
+
+                            <!-- Смайлик для типа растения -->
+                                 </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</Page>

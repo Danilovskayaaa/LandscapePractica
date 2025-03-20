@@ -1,0 +1,1504 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище LandscapeDesignModel" Provider="Npgsql" ProviderManifestToken="17.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="IDClient" />
+          </Key>
+          <Property Name="IDClient" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="34" Nullable="false" />
+          <Property Name="SecondName" Type="varchar" MaxLength="36" />
+          <Property Name="LastName" Type="varchar" MaxLength="38" Nullable="false" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Address" Type="text" />
+          <Property Name="BirthdayDate" Type="date" />
+          <Property Name="PassportSeria" Type="varchar" MaxLength="4" />
+          <Property Name="PassportNumber" Type="varchar" MaxLength="6" />
+        </EntityType>
+        <EntityType Name="Equipment">
+          <Key>
+            <PropertyRef Name="IDEquipment" />
+          </Key>
+          <Property Name="IDEquipment" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDTypeEquipment" Type="int4" />
+          <Property Name="IDStatusEquipment" Type="int4" />
+          <Property Name="Name" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EquipmentUsage">
+          <Key>
+            <PropertyRef Name="IDEquipmentUsage" />
+          </Key>
+          <Property Name="IDEquipmentUsage" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDEquipment" Type="int4" />
+          <Property Name="IDWorker" Type="int4" />
+          <Property Name="StartDate" Type="timestamp" Nullable="false" />
+          <Property Name="EndDate" Type="timestamp" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6005: Тип данных "money" в настоящее время не поддерживается для целевой версии платформы Entity Framework; столбец "TotalAmount" в таблице "LandscapeDesign.public.Invoices" был исключен.-->
+        <EntityType Name="Invoices">
+          <Key>
+            <PropertyRef Name="IDInvoice" />
+          </Key>
+          <Property Name="IDInvoice" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDOrder" Type="int4" />
+          <Property Name="IDInvoiceStatus" Type="int4" />
+          <Property Name="IssueDate" Type="timestamp" Nullable="false" />
+        </EntityType>
+        <EntityType Name="InvoiceStatuses">
+          <Key>
+            <PropertyRef Name="IDInvoiceStatus" />
+          </Key>
+          <Property Name="IDInvoiceStatus" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StatusName" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6005: Тип данных "money" в настоящее время не поддерживается для целевой версии платформы Entity Framework; столбец "PricePerUnit" в таблице "LandscapeDesign.public.Materials" был исключен.-->
+        <EntityType Name="Materials">
+          <Key>
+            <PropertyRef Name="IDMaterial" />
+          </Key>
+          <Property Name="IDMaterial" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Unit" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6005: Тип данных "money" в настоящее время не поддерживается для целевой версии платформы Entity Framework; столбец "TotalPrice" в таблице "LandscapeDesign.public.Orders" был исключен.-->
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="IDOrder" />
+          </Key>
+          <Property Name="IDOrder" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDClient" Type="int4" />
+          <Property Name="OrderDate" Type="timestamp" Nullable="false" />
+          <Property Name="CompletionDate" Type="timestamp" />
+          <Property Name="IDOrderStatus" Type="int4" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6005: Тип данных "money" в настоящее время не поддерживается для целевой версии платформы Entity Framework; столбец "TotalPricePlants" в таблице "LandscapeDesign.public.OrdersPlantsMaterials" был исключен.
+предупреждение 6005: Тип данных "money" в настоящее время не поддерживается для целевой версии платформы Entity Framework; столбец "TotalPriceMaterials" в таблице "LandscapeDesign.public.OrdersPlantsMaterials" был исключен.
+предупреждение 6005: Тип данных "money" в настоящее время не поддерживается для целевой версии платформы Entity Framework; столбец "TotalPrice" в таблице "LandscapeDesign.public.OrdersPlantsMaterials" был исключен.-->
+        <EntityType Name="OrdersPlantsMaterials">
+          <Key>
+            <PropertyRef Name="IDOrderPlantsMaterials" />
+          </Key>
+          <Property Name="IDOrderPlantsMaterials" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDOrder" Type="int4" />
+          <Property Name="IDPlant" Type="int4" />
+          <Property Name="IDMaterial" Type="int4" />
+          <Property Name="QuantityPlant" Type="int4" />
+          <Property Name="QuantityMaterial" Type="int4" />
+        </EntityType>
+        <EntityType Name="OrderStatuses">
+          <Key>
+            <PropertyRef Name="IDOrderStatus" />
+          </Key>
+          <Property Name="IDOrderStatus" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StatusName" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PaymentMethods">
+          <Key>
+            <PropertyRef Name="IDPaymentMethod" />
+          </Key>
+          <Property Name="IDPaymentMethod" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MethodName" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6005: Тип данных "money" в настоящее время не поддерживается для целевой версии платформы Entity Framework; столбец "Amount" в таблице "LandscapeDesign.public.Payments" был исключен.-->
+        <EntityType Name="Payments">
+          <Key>
+            <PropertyRef Name="IDPayment" />
+          </Key>
+          <Property Name="IDPayment" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDPaymentMethod" Type="int4" />
+          <Property Name="IDOrder" Type="int4" />
+          <Property Name="IDClient" Type="int4" />
+          <Property Name="PaymentDate" Type="timestamp" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Plants">
+          <Key>
+            <PropertyRef Name="IDPlant" />
+          </Key>
+          <Property Name="IDPlant" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDPlantType" Type="int4" />
+          <Property Name="Name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="GrowthConditions" Type="varchar" MaxLength="30" />
+          <Property Name="PricePerUnit" Type="numeric" Precision="19" Scale="4" />
+        </EntityType>
+        <EntityType Name="PlantTypes">
+          <Key>
+            <PropertyRef Name="IDPlantType" />
+          </Key>
+          <Property Name="IDPlantType" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PlantType" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Projects">
+          <Key>
+            <PropertyRef Name="IDProject" />
+          </Key>
+          <Property Name="IDProject" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDOrder" Type="int4" />
+          <Property Name="IDWorkers" Type="int4" />
+          <Property Name="IDProjectStatus" Type="int4" />
+          <Property Name="Description" Type="text" />
+          <Property Name="CreatedDate" Type="timestamp" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProjectStatuses">
+          <Key>
+            <PropertyRef Name="IDProjectStatus" />
+          </Key>
+          <Property Name="IDProjectStatus" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StatusName" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Reviews">
+          <Key>
+            <PropertyRef Name="IDReview" />
+          </Key>
+          <Property Name="IDReview" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDOrder" Type="int4" />
+          <Property Name="IDClient" Type="int4" />
+          <Property Name="Rating" Type="int2" />
+          <Property Name="Comment" Type="text" />
+          <Property Name="CreatedDate" Type="timestamp" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="IDRole" />
+          </Key>
+          <Property Name="IDRole" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StatusesEquipment">
+          <Key>
+            <PropertyRef Name="IDStatusEquipment" />
+          </Key>
+          <Property Name="IDStatusEquipment" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StatusEquipment" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tasks">
+          <Key>
+            <PropertyRef Name="IDTasks" />
+          </Key>
+          <Property Name="IDTasks" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDWorkers" Type="int4" />
+          <Property Name="IDProject" Type="int4" />
+          <Property Name="Description" Type="text" Nullable="false" />
+          <Property Name="StartDate" Type="timestamp" Nullable="false" />
+          <Property Name="EndDate" Type="timestamp" />
+        </EntityType>
+        <EntityType Name="TypeEquipment">
+          <Key>
+            <PropertyRef Name="IDTypeEquipment" />
+          </Key>
+          <Property Name="IDTypeEquipment" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypesEquipment" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6005: Тип данных "money" в настоящее время не поддерживается для целевой версии платформы Entity Framework; столбец "Salary" в таблице "LandscapeDesign.public.Workers" был исключен.-->
+        <EntityType Name="Workers">
+          <Key>
+            <PropertyRef Name="IDWorkers" />
+          </Key>
+          <Property Name="IDWorkers" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDRole" Type="int4" />
+          <Property Name="FirstName" Type="varchar" MaxLength="34" Nullable="false" />
+          <Property Name="SecondName" Type="varchar" MaxLength="36" />
+          <Property Name="LastName" Type="varchar" MaxLength="38" Nullable="false" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Address" Type="text" />
+          <Property Name="BirthdayDate" Type="date" />
+          <Property Name="PassportSeria" Type="varchar" MaxLength="4" />
+          <Property Name="PassportNumber" Type="varchar" MaxLength="6" />
+          <Property Name="ExperienceYears" Type="int2" />
+          <Property Name="Login" Type="varchar" MaxLength="20" />
+          <Property Name="Password" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="Equipment_IDStatusEquipment_fkey">
+          <End Role="StatusesEquipment" Type="Self.StatusesEquipment" Multiplicity="0..1" />
+          <End Role="Equipment" Type="Self.Equipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatusesEquipment">
+              <PropertyRef Name="IDStatusEquipment" />
+            </Principal>
+            <Dependent Role="Equipment">
+              <PropertyRef Name="IDStatusEquipment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Equipment_IDTypeEquipment_fkey">
+          <End Role="TypeEquipment" Type="Self.TypeEquipment" Multiplicity="0..1" />
+          <End Role="Equipment" Type="Self.Equipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeEquipment">
+              <PropertyRef Name="IDTypeEquipment" />
+            </Principal>
+            <Dependent Role="Equipment">
+              <PropertyRef Name="IDTypeEquipment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EquipmentUsage_IDEquipment_fkey">
+          <End Role="Equipment" Type="Self.Equipment" Multiplicity="0..1" />
+          <End Role="EquipmentUsage" Type="Self.EquipmentUsage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipment">
+              <PropertyRef Name="IDEquipment" />
+            </Principal>
+            <Dependent Role="EquipmentUsage">
+              <PropertyRef Name="IDEquipment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EquipmentUsage_IDWorker_fkey">
+          <End Role="Workers" Type="Self.Workers" Multiplicity="0..1" />
+          <End Role="EquipmentUsage" Type="Self.EquipmentUsage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workers">
+              <PropertyRef Name="IDWorkers" />
+            </Principal>
+            <Dependent Role="EquipmentUsage">
+              <PropertyRef Name="IDWorker" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Invoices_IDInvoiceStatus_fkey">
+          <End Role="InvoiceStatuses" Type="Self.InvoiceStatuses" Multiplicity="0..1" />
+          <End Role="Invoices" Type="Self.Invoices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InvoiceStatuses">
+              <PropertyRef Name="IDInvoiceStatus" />
+            </Principal>
+            <Dependent Role="Invoices">
+              <PropertyRef Name="IDInvoiceStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Invoices_IDOrder_fkey">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="0..1" />
+          <End Role="Invoices" Type="Self.Invoices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="IDOrder" />
+            </Principal>
+            <Dependent Role="Invoices">
+              <PropertyRef Name="IDOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Orders_IDClient_fkey">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="IDClient" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="IDClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Orders_IDOrderStatus_fkey">
+          <End Role="OrderStatuses" Type="Self.OrderStatuses" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderStatuses">
+              <PropertyRef Name="IDOrderStatus" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="IDOrderStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="OrdersPlantsMaterials_IDMaterial_fkey">
+          <End Role="Materials" Type="Self.Materials" Multiplicity="0..1" />
+          <End Role="OrdersPlantsMaterials" Type="Self.OrdersPlantsMaterials" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Materials">
+              <PropertyRef Name="IDMaterial" />
+            </Principal>
+            <Dependent Role="OrdersPlantsMaterials">
+              <PropertyRef Name="IDMaterial" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="OrdersPlantsMaterials_IDOrder_fkey">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="0..1" />
+          <End Role="OrdersPlantsMaterials" Type="Self.OrdersPlantsMaterials" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="IDOrder" />
+            </Principal>
+            <Dependent Role="OrdersPlantsMaterials">
+              <PropertyRef Name="IDOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="OrdersPlantsMaterials_IDPlant_fkey">
+          <End Role="Plants" Type="Self.Plants" Multiplicity="0..1" />
+          <End Role="OrdersPlantsMaterials" Type="Self.OrdersPlantsMaterials" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Plants">
+              <PropertyRef Name="IDPlant" />
+            </Principal>
+            <Dependent Role="OrdersPlantsMaterials">
+              <PropertyRef Name="IDPlant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Payments_IDClient_fkey">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="0..1" />
+          <End Role="Payments" Type="Self.Payments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="IDClient" />
+            </Principal>
+            <Dependent Role="Payments">
+              <PropertyRef Name="IDClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Payments_IDOrder_fkey">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="0..1" />
+          <End Role="Payments" Type="Self.Payments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="IDOrder" />
+            </Principal>
+            <Dependent Role="Payments">
+              <PropertyRef Name="IDOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Payments_IDPaymentMethod_fkey">
+          <End Role="PaymentMethods" Type="Self.PaymentMethods" Multiplicity="0..1" />
+          <End Role="Payments" Type="Self.Payments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentMethods">
+              <PropertyRef Name="IDPaymentMethod" />
+            </Principal>
+            <Dependent Role="Payments">
+              <PropertyRef Name="IDPaymentMethod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Plants_IDPlantType_fkey">
+          <End Role="PlantTypes" Type="Self.PlantTypes" Multiplicity="0..1" />
+          <End Role="Plants" Type="Self.Plants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PlantTypes">
+              <PropertyRef Name="IDPlantType" />
+            </Principal>
+            <Dependent Role="Plants">
+              <PropertyRef Name="IDPlantType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Projects_IDOrder_fkey">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="0..1" />
+          <End Role="Projects" Type="Self.Projects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="IDOrder" />
+            </Principal>
+            <Dependent Role="Projects">
+              <PropertyRef Name="IDOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Projects_IDProjectStatus_fkey">
+          <End Role="ProjectStatuses" Type="Self.ProjectStatuses" Multiplicity="0..1" />
+          <End Role="Projects" Type="Self.Projects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProjectStatuses">
+              <PropertyRef Name="IDProjectStatus" />
+            </Principal>
+            <Dependent Role="Projects">
+              <PropertyRef Name="IDProjectStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Projects_IDWorkers_fkey">
+          <End Role="Workers" Type="Self.Workers" Multiplicity="0..1" />
+          <End Role="Projects" Type="Self.Projects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workers">
+              <PropertyRef Name="IDWorkers" />
+            </Principal>
+            <Dependent Role="Projects">
+              <PropertyRef Name="IDWorkers" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Reviews_IDClient_fkey">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="0..1" />
+          <End Role="Reviews" Type="Self.Reviews" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="IDClient" />
+            </Principal>
+            <Dependent Role="Reviews">
+              <PropertyRef Name="IDClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Reviews_IDOrder_fkey">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="0..1" />
+          <End Role="Reviews" Type="Self.Reviews" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="IDOrder" />
+            </Principal>
+            <Dependent Role="Reviews">
+              <PropertyRef Name="IDOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Tasks_IDProject_fkey">
+          <End Role="Projects" Type="Self.Projects" Multiplicity="0..1" />
+          <End Role="Tasks" Type="Self.Tasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="IDProject" />
+            </Principal>
+            <Dependent Role="Tasks">
+              <PropertyRef Name="IDProject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Tasks_IDWorkers_fkey">
+          <End Role="Workers" Type="Self.Workers" Multiplicity="0..1" />
+          <End Role="Tasks" Type="Self.Tasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workers">
+              <PropertyRef Name="IDWorkers" />
+            </Principal>
+            <Dependent Role="Tasks">
+              <PropertyRef Name="IDWorkers" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Workers_IDRole_fkey">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+          <End Role="Workers" Type="Self.Workers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="IDRole" />
+            </Principal>
+            <Dependent Role="Workers">
+              <PropertyRef Name="IDRole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище LandscapeDesignModelContainer">
+          <EntitySet Name="Clients" EntityType="Self.Clients" Schema="public" store:Type="Tables" />
+          <EntitySet Name="Equipment" EntityType="Self.Equipment" Schema="public" store:Type="Tables" />
+          <EntitySet Name="EquipmentUsage" EntityType="Self.EquipmentUsage" Schema="public" store:Type="Tables" />
+          <EntitySet Name="Invoices" EntityType="Self.Invoices" Schema="public" store:Type="Tables" />
+          <EntitySet Name="InvoiceStatuses" EntityType="Self.InvoiceStatuses" Schema="public" store:Type="Tables" />
+          <EntitySet Name="Materials" EntityType="Self.Materials" Schema="public" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="public" store:Type="Tables" />
+          <EntitySet Name="OrdersPlantsMaterials" EntityType="Self.OrdersPlantsMaterials" Schema="public" store:Type="Tables" />
+          <EntitySet Name="OrderStatuses" EntityType="Self.OrderStatuses" Schema="public" store:Type="Tables" />
+          <EntitySet Name="PaymentMethods" EntityType="Self.PaymentMethods" Schema="public" store:Type="Tables" />
+          <EntitySet Name="Payments" EntityType="Self.Payments" Schema="public" store:Type="Tables" />
+          <EntitySet Name="Plants" EntityType="Self.Plants" Schema="public" store:Type="Tables" />
+          <EntitySet Name="PlantTypes" EntityType="Self.PlantTypes" Schema="public" store:Type="Tables" />
+          <EntitySet Name="Projects" EntityType="Self.Projects" Schema="public" store:Type="Tables" />
+          <EntitySet Name="ProjectStatuses" EntityType="Self.ProjectStatuses" Schema="public" store:Type="Tables" />
+          <EntitySet Name="Reviews" EntityType="Self.Reviews" Schema="public" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="public" store:Type="Tables" />
+          <EntitySet Name="StatusesEquipment" EntityType="Self.StatusesEquipment" Schema="public" store:Type="Tables" />
+          <EntitySet Name="Tasks" EntityType="Self.Tasks" Schema="public" store:Type="Tables" />
+          <EntitySet Name="TypeEquipment" EntityType="Self.TypeEquipment" Schema="public" store:Type="Tables" />
+          <EntitySet Name="Workers" EntityType="Self.Workers" Schema="public" store:Type="Tables" />
+          <AssociationSet Name="Equipment_IDStatusEquipment_fkey" Association="Self.Equipment_IDStatusEquipment_fkey">
+            <End Role="StatusesEquipment" EntitySet="StatusesEquipment" />
+            <End Role="Equipment" EntitySet="Equipment" />
+          </AssociationSet>
+          <AssociationSet Name="Equipment_IDTypeEquipment_fkey" Association="Self.Equipment_IDTypeEquipment_fkey">
+            <End Role="TypeEquipment" EntitySet="TypeEquipment" />
+            <End Role="Equipment" EntitySet="Equipment" />
+          </AssociationSet>
+          <AssociationSet Name="EquipmentUsage_IDEquipment_fkey" Association="Self.EquipmentUsage_IDEquipment_fkey">
+            <End Role="Equipment" EntitySet="Equipment" />
+            <End Role="EquipmentUsage" EntitySet="EquipmentUsage" />
+          </AssociationSet>
+          <AssociationSet Name="EquipmentUsage_IDWorker_fkey" Association="Self.EquipmentUsage_IDWorker_fkey">
+            <End Role="Workers" EntitySet="Workers" />
+            <End Role="EquipmentUsage" EntitySet="EquipmentUsage" />
+          </AssociationSet>
+          <AssociationSet Name="Invoices_IDInvoiceStatus_fkey" Association="Self.Invoices_IDInvoiceStatus_fkey">
+            <End Role="InvoiceStatuses" EntitySet="InvoiceStatuses" />
+            <End Role="Invoices" EntitySet="Invoices" />
+          </AssociationSet>
+          <AssociationSet Name="Invoices_IDOrder_fkey" Association="Self.Invoices_IDOrder_fkey">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="Invoices" EntitySet="Invoices" />
+          </AssociationSet>
+          <AssociationSet Name="Orders_IDClient_fkey" Association="Self.Orders_IDClient_fkey">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="Orders_IDOrderStatus_fkey" Association="Self.Orders_IDOrderStatus_fkey">
+            <End Role="OrderStatuses" EntitySet="OrderStatuses" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="OrdersPlantsMaterials_IDMaterial_fkey" Association="Self.OrdersPlantsMaterials_IDMaterial_fkey">
+            <End Role="Materials" EntitySet="Materials" />
+            <End Role="OrdersPlantsMaterials" EntitySet="OrdersPlantsMaterials" />
+          </AssociationSet>
+          <AssociationSet Name="OrdersPlantsMaterials_IDOrder_fkey" Association="Self.OrdersPlantsMaterials_IDOrder_fkey">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrdersPlantsMaterials" EntitySet="OrdersPlantsMaterials" />
+          </AssociationSet>
+          <AssociationSet Name="OrdersPlantsMaterials_IDPlant_fkey" Association="Self.OrdersPlantsMaterials_IDPlant_fkey">
+            <End Role="Plants" EntitySet="Plants" />
+            <End Role="OrdersPlantsMaterials" EntitySet="OrdersPlantsMaterials" />
+          </AssociationSet>
+          <AssociationSet Name="Payments_IDClient_fkey" Association="Self.Payments_IDClient_fkey">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Payments" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="Payments_IDOrder_fkey" Association="Self.Payments_IDOrder_fkey">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="Payments" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="Payments_IDPaymentMethod_fkey" Association="Self.Payments_IDPaymentMethod_fkey">
+            <End Role="PaymentMethods" EntitySet="PaymentMethods" />
+            <End Role="Payments" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="Plants_IDPlantType_fkey" Association="Self.Plants_IDPlantType_fkey">
+            <End Role="PlantTypes" EntitySet="PlantTypes" />
+            <End Role="Plants" EntitySet="Plants" />
+          </AssociationSet>
+          <AssociationSet Name="Projects_IDOrder_fkey" Association="Self.Projects_IDOrder_fkey">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="Projects" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="Projects_IDProjectStatus_fkey" Association="Self.Projects_IDProjectStatus_fkey">
+            <End Role="ProjectStatuses" EntitySet="ProjectStatuses" />
+            <End Role="Projects" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="Projects_IDWorkers_fkey" Association="Self.Projects_IDWorkers_fkey">
+            <End Role="Workers" EntitySet="Workers" />
+            <End Role="Projects" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="Reviews_IDClient_fkey" Association="Self.Reviews_IDClient_fkey">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Reviews" EntitySet="Reviews" />
+          </AssociationSet>
+          <AssociationSet Name="Reviews_IDOrder_fkey" Association="Self.Reviews_IDOrder_fkey">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="Reviews" EntitySet="Reviews" />
+          </AssociationSet>
+          <AssociationSet Name="Tasks_IDProject_fkey" Association="Self.Tasks_IDProject_fkey">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="Tasks" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="Tasks_IDWorkers_fkey" Association="Self.Tasks_IDWorkers_fkey">
+            <End Role="Workers" EntitySet="Workers" />
+            <End Role="Tasks" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="Workers_IDRole_fkey" Association="Self.Workers_IDRole_fkey">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Workers" EntitySet="Workers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LandscapeDesignModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="IDClient" />
+          </Key>
+          <Property Name="IDClient" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="34" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SecondName" Type="String" MaxLength="36" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="38" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BirthdayDate" Type="DateTime" Precision="0" />
+          <Property Name="PassportSeria" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="PassportNumber" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Orders" Relationship="Self.Orders_IDClient_fkey" FromRole="Clients" ToRole="Orders" />
+          <NavigationProperty Name="Payments" Relationship="Self.Payments_IDClient_fkey" FromRole="Clients" ToRole="Payments" />
+          <NavigationProperty Name="Reviews" Relationship="Self.Reviews_IDClient_fkey" FromRole="Clients" ToRole="Reviews" />
+        </EntityType>
+        <EntityType Name="Equipment">
+          <Key>
+            <PropertyRef Name="IDEquipment" />
+          </Key>
+          <Property Name="IDEquipment" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDTypeEquipment" Type="Int32" />
+          <Property Name="IDStatusEquipment" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="StatusesEquipment" Relationship="Self.Equipment_IDStatusEquipment_fkey" FromRole="Equipment" ToRole="StatusesEquipment" />
+          <NavigationProperty Name="TypeEquipment" Relationship="Self.Equipment_IDTypeEquipment_fkey" FromRole="Equipment" ToRole="TypeEquipment" />
+          <NavigationProperty Name="EquipmentUsage" Relationship="Self.EquipmentUsage_IDEquipment_fkey" FromRole="Equipment" ToRole="EquipmentUsage" />
+        </EntityType>
+        <EntityType Name="EquipmentUsage">
+          <Key>
+            <PropertyRef Name="IDEquipmentUsage" />
+          </Key>
+          <Property Name="IDEquipmentUsage" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDEquipment" Type="Int32" />
+          <Property Name="IDWorker" Type="Int32" />
+          <Property Name="StartDate" Type="DateTime" Precision="6" Nullable="false" />
+          <Property Name="EndDate" Type="DateTime" Precision="6" />
+          <NavigationProperty Name="Equipment" Relationship="Self.EquipmentUsage_IDEquipment_fkey" FromRole="EquipmentUsage" ToRole="Equipment" />
+          <NavigationProperty Name="Workers" Relationship="Self.EquipmentUsage_IDWorker_fkey" FromRole="EquipmentUsage" ToRole="Workers" />
+        </EntityType>
+        <EntityType Name="Invoices">
+          <Key>
+            <PropertyRef Name="IDInvoice" />
+          </Key>
+          <Property Name="IDInvoice" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDOrder" Type="Int32" />
+          <Property Name="IDInvoiceStatus" Type="Int32" />
+          <Property Name="IssueDate" Type="DateTime" Precision="6" Nullable="false" />
+          <NavigationProperty Name="InvoiceStatuses" Relationship="Self.Invoices_IDInvoiceStatus_fkey" FromRole="Invoices" ToRole="InvoiceStatuses" />
+          <NavigationProperty Name="Orders" Relationship="Self.Invoices_IDOrder_fkey" FromRole="Invoices" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="InvoiceStatuses">
+          <Key>
+            <PropertyRef Name="IDInvoiceStatus" />
+          </Key>
+          <Property Name="IDInvoiceStatus" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StatusName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Invoices" Relationship="Self.Invoices_IDInvoiceStatus_fkey" FromRole="InvoiceStatuses" ToRole="Invoices" />
+        </EntityType>
+        <EntityType Name="Materials">
+          <Key>
+            <PropertyRef Name="IDMaterial" />
+          </Key>
+          <Property Name="IDMaterial" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Unit" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="OrdersPlantsMaterials" Relationship="Self.OrdersPlantsMaterials_IDMaterial_fkey" FromRole="Materials" ToRole="OrdersPlantsMaterials" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="IDOrder" />
+          </Key>
+          <Property Name="IDOrder" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDClient" Type="Int32" />
+          <Property Name="OrderDate" Type="DateTime" Precision="6" Nullable="false" />
+          <Property Name="CompletionDate" Type="DateTime" Precision="6" />
+          <Property Name="IDOrderStatus" Type="Int32" />
+          <NavigationProperty Name="Clients" Relationship="Self.Orders_IDClient_fkey" FromRole="Orders" ToRole="Clients" />
+          <NavigationProperty Name="Invoices" Relationship="Self.Invoices_IDOrder_fkey" FromRole="Orders" ToRole="Invoices" />
+          <NavigationProperty Name="OrderStatuses" Relationship="Self.Orders_IDOrderStatus_fkey" FromRole="Orders" ToRole="OrderStatuses" />
+          <NavigationProperty Name="OrdersPlantsMaterials" Relationship="Self.OrdersPlantsMaterials_IDOrder_fkey" FromRole="Orders" ToRole="OrdersPlantsMaterials" />
+          <NavigationProperty Name="Payments" Relationship="Self.Payments_IDOrder_fkey" FromRole="Orders" ToRole="Payments" />
+          <NavigationProperty Name="Projects" Relationship="Self.Projects_IDOrder_fkey" FromRole="Orders" ToRole="Projects" />
+          <NavigationProperty Name="Reviews" Relationship="Self.Reviews_IDOrder_fkey" FromRole="Orders" ToRole="Reviews" />
+        </EntityType>
+        <EntityType Name="OrdersPlantsMaterials">
+          <Key>
+            <PropertyRef Name="IDOrderPlantsMaterials" />
+          </Key>
+          <Property Name="IDOrderPlantsMaterials" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDOrder" Type="Int32" />
+          <Property Name="IDPlant" Type="Int32" />
+          <Property Name="IDMaterial" Type="Int32" />
+          <Property Name="QuantityPlant" Type="Int32" />
+          <Property Name="QuantityMaterial" Type="Int32" />
+          <NavigationProperty Name="Materials" Relationship="Self.OrdersPlantsMaterials_IDMaterial_fkey" FromRole="OrdersPlantsMaterials" ToRole="Materials" />
+          <NavigationProperty Name="Orders" Relationship="Self.OrdersPlantsMaterials_IDOrder_fkey" FromRole="OrdersPlantsMaterials" ToRole="Orders" />
+          <NavigationProperty Name="Plants" Relationship="Self.OrdersPlantsMaterials_IDPlant_fkey" FromRole="OrdersPlantsMaterials" ToRole="Plants" />
+        </EntityType>
+        <EntityType Name="OrderStatuses">
+          <Key>
+            <PropertyRef Name="IDOrderStatus" />
+          </Key>
+          <Property Name="IDOrderStatus" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StatusName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Orders" Relationship="Self.Orders_IDOrderStatus_fkey" FromRole="OrderStatuses" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="PaymentMethods">
+          <Key>
+            <PropertyRef Name="IDPaymentMethod" />
+          </Key>
+          <Property Name="IDPaymentMethod" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MethodName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Payments" Relationship="Self.Payments_IDPaymentMethod_fkey" FromRole="PaymentMethods" ToRole="Payments" />
+        </EntityType>
+        <EntityType Name="Payments">
+          <Key>
+            <PropertyRef Name="IDPayment" />
+          </Key>
+          <Property Name="IDPayment" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDPaymentMethod" Type="Int32" />
+          <Property Name="IDOrder" Type="Int32" />
+          <Property Name="IDClient" Type="Int32" />
+          <Property Name="PaymentDate" Type="DateTime" Precision="6" Nullable="false" />
+          <NavigationProperty Name="Clients" Relationship="Self.Payments_IDClient_fkey" FromRole="Payments" ToRole="Clients" />
+          <NavigationProperty Name="Orders" Relationship="Self.Payments_IDOrder_fkey" FromRole="Payments" ToRole="Orders" />
+          <NavigationProperty Name="PaymentMethods" Relationship="Self.Payments_IDPaymentMethod_fkey" FromRole="Payments" ToRole="PaymentMethods" />
+        </EntityType>
+        <EntityType Name="Plants">
+          <Key>
+            <PropertyRef Name="IDPlant" />
+          </Key>
+          <Property Name="IDPlant" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDPlantType" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="GrowthConditions" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="OrdersPlantsMaterials" Relationship="Self.OrdersPlantsMaterials_IDPlant_fkey" FromRole="Plants" ToRole="OrdersPlantsMaterials" />
+          <NavigationProperty Name="PlantTypes" Relationship="Self.Plants_IDPlantType_fkey" FromRole="Plants" ToRole="PlantTypes" />
+          <Property Name="PricePerUnit" Type="Decimal" Precision="19" Scale="4" />
+        </EntityType>
+        <EntityType Name="PlantTypes">
+          <Key>
+            <PropertyRef Name="IDPlantType" />
+          </Key>
+          <Property Name="IDPlantType" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PlantType" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Plants" Relationship="Self.Plants_IDPlantType_fkey" FromRole="PlantTypes" ToRole="Plants" />
+        </EntityType>
+        <EntityType Name="Projects">
+          <Key>
+            <PropertyRef Name="IDProject" />
+          </Key>
+          <Property Name="IDProject" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDOrder" Type="Int32" />
+          <Property Name="IDWorkers" Type="Int32" />
+          <Property Name="IDProjectStatus" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="6" Nullable="false" />
+          <NavigationProperty Name="Orders" Relationship="Self.Projects_IDOrder_fkey" FromRole="Projects" ToRole="Orders" />
+          <NavigationProperty Name="ProjectStatuses" Relationship="Self.Projects_IDProjectStatus_fkey" FromRole="Projects" ToRole="ProjectStatuses" />
+          <NavigationProperty Name="Workers" Relationship="Self.Projects_IDWorkers_fkey" FromRole="Projects" ToRole="Workers" />
+          <NavigationProperty Name="Tasks" Relationship="Self.Tasks_IDProject_fkey" FromRole="Projects" ToRole="Tasks" />
+        </EntityType>
+        <EntityType Name="ProjectStatuses">
+          <Key>
+            <PropertyRef Name="IDProjectStatus" />
+          </Key>
+          <Property Name="IDProjectStatus" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StatusName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Projects" Relationship="Self.Projects_IDProjectStatus_fkey" FromRole="ProjectStatuses" ToRole="Projects" />
+        </EntityType>
+        <EntityType Name="Reviews">
+          <Key>
+            <PropertyRef Name="IDReview" />
+          </Key>
+          <Property Name="IDReview" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDOrder" Type="Int32" />
+          <Property Name="IDClient" Type="Int32" />
+          <Property Name="Rating" Type="Int16" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="6" Nullable="false" />
+          <NavigationProperty Name="Clients" Relationship="Self.Reviews_IDClient_fkey" FromRole="Reviews" ToRole="Clients" />
+          <NavigationProperty Name="Orders" Relationship="Self.Reviews_IDOrder_fkey" FromRole="Reviews" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="IDRole" />
+          </Key>
+          <Property Name="IDRole" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Workers" Relationship="Self.Workers_IDRole_fkey" FromRole="Roles" ToRole="Workers" />
+        </EntityType>
+        <EntityType Name="StatusesEquipment">
+          <Key>
+            <PropertyRef Name="IDStatusEquipment" />
+          </Key>
+          <Property Name="IDStatusEquipment" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StatusEquipment" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Equipment" Relationship="Self.Equipment_IDStatusEquipment_fkey" FromRole="StatusesEquipment" ToRole="Equipment" />
+        </EntityType>
+        <EntityType Name="Tasks">
+          <Key>
+            <PropertyRef Name="IDTasks" />
+          </Key>
+          <Property Name="IDTasks" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDWorkers" Type="Int32" />
+          <Property Name="IDProject" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Precision="6" Nullable="false" />
+          <Property Name="EndDate" Type="DateTime" Precision="6" />
+          <NavigationProperty Name="Projects" Relationship="Self.Tasks_IDProject_fkey" FromRole="Tasks" ToRole="Projects" />
+          <NavigationProperty Name="Workers" Relationship="Self.Tasks_IDWorkers_fkey" FromRole="Tasks" ToRole="Workers" />
+        </EntityType>
+        <EntityType Name="TypeEquipment">
+          <Key>
+            <PropertyRef Name="IDTypeEquipment" />
+          </Key>
+          <Property Name="IDTypeEquipment" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypesEquipment" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Equipment" Relationship="Self.Equipment_IDTypeEquipment_fkey" FromRole="TypeEquipment" ToRole="Equipment" />
+        </EntityType>
+        <EntityType Name="Workers">
+          <Key>
+            <PropertyRef Name="IDWorkers" />
+          </Key>
+          <Property Name="IDWorkers" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDRole" Type="Int32" />
+          <Property Name="FirstName" Type="String" MaxLength="34" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SecondName" Type="String" MaxLength="36" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="38" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BirthdayDate" Type="DateTime" Precision="0" />
+          <Property Name="PassportSeria" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="PassportNumber" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="ExperienceYears" Type="Int16" />
+          <Property Name="Login" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="EquipmentUsage" Relationship="Self.EquipmentUsage_IDWorker_fkey" FromRole="Workers" ToRole="EquipmentUsage" />
+          <NavigationProperty Name="Projects" Relationship="Self.Projects_IDWorkers_fkey" FromRole="Workers" ToRole="Projects" />
+          <NavigationProperty Name="Roles" Relationship="Self.Workers_IDRole_fkey" FromRole="Workers" ToRole="Roles" />
+          <NavigationProperty Name="Tasks" Relationship="Self.Tasks_IDWorkers_fkey" FromRole="Workers" ToRole="Tasks" />
+        </EntityType>
+        <Association Name="Orders_IDClient_fkey">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="IDClient" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="IDClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Payments_IDClient_fkey">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="0..1" />
+          <End Role="Payments" Type="Self.Payments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="IDClient" />
+            </Principal>
+            <Dependent Role="Payments">
+              <PropertyRef Name="IDClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Reviews_IDClient_fkey">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="0..1" />
+          <End Role="Reviews" Type="Self.Reviews" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="IDClient" />
+            </Principal>
+            <Dependent Role="Reviews">
+              <PropertyRef Name="IDClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Equipment_IDStatusEquipment_fkey">
+          <End Role="StatusesEquipment" Type="Self.StatusesEquipment" Multiplicity="0..1" />
+          <End Role="Equipment" Type="Self.Equipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatusesEquipment">
+              <PropertyRef Name="IDStatusEquipment" />
+            </Principal>
+            <Dependent Role="Equipment">
+              <PropertyRef Name="IDStatusEquipment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Equipment_IDTypeEquipment_fkey">
+          <End Role="TypeEquipment" Type="Self.TypeEquipment" Multiplicity="0..1" />
+          <End Role="Equipment" Type="Self.Equipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeEquipment">
+              <PropertyRef Name="IDTypeEquipment" />
+            </Principal>
+            <Dependent Role="Equipment">
+              <PropertyRef Name="IDTypeEquipment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EquipmentUsage_IDEquipment_fkey">
+          <End Role="Equipment" Type="Self.Equipment" Multiplicity="0..1" />
+          <End Role="EquipmentUsage" Type="Self.EquipmentUsage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipment">
+              <PropertyRef Name="IDEquipment" />
+            </Principal>
+            <Dependent Role="EquipmentUsage">
+              <PropertyRef Name="IDEquipment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EquipmentUsage_IDWorker_fkey">
+          <End Role="Workers" Type="Self.Workers" Multiplicity="0..1" />
+          <End Role="EquipmentUsage" Type="Self.EquipmentUsage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workers">
+              <PropertyRef Name="IDWorkers" />
+            </Principal>
+            <Dependent Role="EquipmentUsage">
+              <PropertyRef Name="IDWorker" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Invoices_IDInvoiceStatus_fkey">
+          <End Role="InvoiceStatuses" Type="Self.InvoiceStatuses" Multiplicity="0..1" />
+          <End Role="Invoices" Type="Self.Invoices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InvoiceStatuses">
+              <PropertyRef Name="IDInvoiceStatus" />
+            </Principal>
+            <Dependent Role="Invoices">
+              <PropertyRef Name="IDInvoiceStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Invoices_IDOrder_fkey">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="0..1" />
+          <End Role="Invoices" Type="Self.Invoices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="IDOrder" />
+            </Principal>
+            <Dependent Role="Invoices">
+              <PropertyRef Name="IDOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="OrdersPlantsMaterials_IDMaterial_fkey">
+          <End Role="Materials" Type="Self.Materials" Multiplicity="0..1" />
+          <End Role="OrdersPlantsMaterials" Type="Self.OrdersPlantsMaterials" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Materials">
+              <PropertyRef Name="IDMaterial" />
+            </Principal>
+            <Dependent Role="OrdersPlantsMaterials">
+              <PropertyRef Name="IDMaterial" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Orders_IDOrderStatus_fkey">
+          <End Role="OrderStatuses" Type="Self.OrderStatuses" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderStatuses">
+              <PropertyRef Name="IDOrderStatus" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="IDOrderStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="OrdersPlantsMaterials_IDOrder_fkey">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="0..1" />
+          <End Role="OrdersPlantsMaterials" Type="Self.OrdersPlantsMaterials" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="IDOrder" />
+            </Principal>
+            <Dependent Role="OrdersPlantsMaterials">
+              <PropertyRef Name="IDOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Payments_IDOrder_fkey">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="0..1" />
+          <End Role="Payments" Type="Self.Payments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="IDOrder" />
+            </Principal>
+            <Dependent Role="Payments">
+              <PropertyRef Name="IDOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Projects_IDOrder_fkey">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="0..1" />
+          <End Role="Projects" Type="Self.Projects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="IDOrder" />
+            </Principal>
+            <Dependent Role="Projects">
+              <PropertyRef Name="IDOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Reviews_IDOrder_fkey">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="0..1" />
+          <End Role="Reviews" Type="Self.Reviews" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="IDOrder" />
+            </Principal>
+            <Dependent Role="Reviews">
+              <PropertyRef Name="IDOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="OrdersPlantsMaterials_IDPlant_fkey">
+          <End Role="Plants" Type="Self.Plants" Multiplicity="0..1" />
+          <End Role="OrdersPlantsMaterials" Type="Self.OrdersPlantsMaterials" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Plants">
+              <PropertyRef Name="IDPlant" />
+            </Principal>
+            <Dependent Role="OrdersPlantsMaterials">
+              <PropertyRef Name="IDPlant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Payments_IDPaymentMethod_fkey">
+          <End Role="PaymentMethods" Type="Self.PaymentMethods" Multiplicity="0..1" />
+          <End Role="Payments" Type="Self.Payments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentMethods">
+              <PropertyRef Name="IDPaymentMethod" />
+            </Principal>
+            <Dependent Role="Payments">
+              <PropertyRef Name="IDPaymentMethod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Plants_IDPlantType_fkey">
+          <End Role="PlantTypes" Type="Self.PlantTypes" Multiplicity="0..1" />
+          <End Role="Plants" Type="Self.Plants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PlantTypes">
+              <PropertyRef Name="IDPlantType" />
+            </Principal>
+            <Dependent Role="Plants">
+              <PropertyRef Name="IDPlantType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Projects_IDProjectStatus_fkey">
+          <End Role="ProjectStatuses" Type="Self.ProjectStatuses" Multiplicity="0..1" />
+          <End Role="Projects" Type="Self.Projects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProjectStatuses">
+              <PropertyRef Name="IDProjectStatus" />
+            </Principal>
+            <Dependent Role="Projects">
+              <PropertyRef Name="IDProjectStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Projects_IDWorkers_fkey">
+          <End Role="Workers" Type="Self.Workers" Multiplicity="0..1" />
+          <End Role="Projects" Type="Self.Projects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workers">
+              <PropertyRef Name="IDWorkers" />
+            </Principal>
+            <Dependent Role="Projects">
+              <PropertyRef Name="IDWorkers" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Tasks_IDProject_fkey">
+          <End Role="Projects" Type="Self.Projects" Multiplicity="0..1" />
+          <End Role="Tasks" Type="Self.Tasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="IDProject" />
+            </Principal>
+            <Dependent Role="Tasks">
+              <PropertyRef Name="IDProject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Workers_IDRole_fkey">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+          <End Role="Workers" Type="Self.Workers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="IDRole" />
+            </Principal>
+            <Dependent Role="Workers">
+              <PropertyRef Name="IDRole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Tasks_IDWorkers_fkey">
+          <End Role="Workers" Type="Self.Workers" Multiplicity="0..1" />
+          <End Role="Tasks" Type="Self.Tasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workers">
+              <PropertyRef Name="IDWorkers" />
+            </Principal>
+            <Dependent Role="Tasks">
+              <PropertyRef Name="IDWorkers" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BazaDan" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Clients" EntityType="Self.Clients" />
+          <EntitySet Name="Equipment" EntityType="Self.Equipment" />
+          <EntitySet Name="EquipmentUsage" EntityType="Self.EquipmentUsage" />
+          <EntitySet Name="Invoices" EntityType="Self.Invoices" />
+          <EntitySet Name="InvoiceStatuses" EntityType="Self.InvoiceStatuses" />
+          <EntitySet Name="Materials" EntityType="Self.Materials" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" />
+          <EntitySet Name="OrdersPlantsMaterials" EntityType="Self.OrdersPlantsMaterials" />
+          <EntitySet Name="OrderStatuses" EntityType="Self.OrderStatuses" />
+          <EntitySet Name="PaymentMethods" EntityType="Self.PaymentMethods" />
+          <EntitySet Name="Payments" EntityType="Self.Payments" />
+          <EntitySet Name="Plants" EntityType="Self.Plants" />
+          <EntitySet Name="PlantTypes" EntityType="Self.PlantTypes" />
+          <EntitySet Name="Projects" EntityType="Self.Projects" />
+          <EntitySet Name="ProjectStatuses" EntityType="Self.ProjectStatuses" />
+          <EntitySet Name="Reviews" EntityType="Self.Reviews" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" />
+          <EntitySet Name="StatusesEquipment" EntityType="Self.StatusesEquipment" />
+          <EntitySet Name="Tasks" EntityType="Self.Tasks" />
+          <EntitySet Name="TypeEquipment" EntityType="Self.TypeEquipment" />
+          <EntitySet Name="Workers" EntityType="Self.Workers" />
+          <AssociationSet Name="Orders_IDClient_fkey" Association="Self.Orders_IDClient_fkey">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="Payments_IDClient_fkey" Association="Self.Payments_IDClient_fkey">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Payments" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="Reviews_IDClient_fkey" Association="Self.Reviews_IDClient_fkey">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Reviews" EntitySet="Reviews" />
+          </AssociationSet>
+          <AssociationSet Name="Equipment_IDStatusEquipment_fkey" Association="Self.Equipment_IDStatusEquipment_fkey">
+            <End Role="StatusesEquipment" EntitySet="StatusesEquipment" />
+            <End Role="Equipment" EntitySet="Equipment" />
+          </AssociationSet>
+          <AssociationSet Name="Equipment_IDTypeEquipment_fkey" Association="Self.Equipment_IDTypeEquipment_fkey">
+            <End Role="TypeEquipment" EntitySet="TypeEquipment" />
+            <End Role="Equipment" EntitySet="Equipment" />
+          </AssociationSet>
+          <AssociationSet Name="EquipmentUsage_IDEquipment_fkey" Association="Self.EquipmentUsage_IDEquipment_fkey">
+            <End Role="Equipment" EntitySet="Equipment" />
+            <End Role="EquipmentUsage" EntitySet="EquipmentUsage" />
+          </AssociationSet>
+          <AssociationSet Name="EquipmentUsage_IDWorker_fkey" Association="Self.EquipmentUsage_IDWorker_fkey">
+            <End Role="Workers" EntitySet="Workers" />
+            <End Role="EquipmentUsage" EntitySet="EquipmentUsage" />
+          </AssociationSet>
+          <AssociationSet Name="Invoices_IDInvoiceStatus_fkey" Association="Self.Invoices_IDInvoiceStatus_fkey">
+            <End Role="InvoiceStatuses" EntitySet="InvoiceStatuses" />
+            <End Role="Invoices" EntitySet="Invoices" />
+          </AssociationSet>
+          <AssociationSet Name="Invoices_IDOrder_fkey" Association="Self.Invoices_IDOrder_fkey">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="Invoices" EntitySet="Invoices" />
+          </AssociationSet>
+          <AssociationSet Name="OrdersPlantsMaterials_IDMaterial_fkey" Association="Self.OrdersPlantsMaterials_IDMaterial_fkey">
+            <End Role="Materials" EntitySet="Materials" />
+            <End Role="OrdersPlantsMaterials" EntitySet="OrdersPlantsMaterials" />
+          </AssociationSet>
+          <AssociationSet Name="Orders_IDOrderStatus_fkey" Association="Self.Orders_IDOrderStatus_fkey">
+            <End Role="OrderStatuses" EntitySet="OrderStatuses" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="OrdersPlantsMaterials_IDOrder_fkey" Association="Self.OrdersPlantsMaterials_IDOrder_fkey">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrdersPlantsMaterials" EntitySet="OrdersPlantsMaterials" />
+          </AssociationSet>
+          <AssociationSet Name="Payments_IDOrder_fkey" Association="Self.Payments_IDOrder_fkey">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="Payments" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="Projects_IDOrder_fkey" Association="Self.Projects_IDOrder_fkey">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="Projects" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="Reviews_IDOrder_fkey" Association="Self.Reviews_IDOrder_fkey">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="Reviews" EntitySet="Reviews" />
+          </AssociationSet>
+          <AssociationSet Name="OrdersPlantsMaterials_IDPlant_fkey" Association="Self.OrdersPlantsMaterials_IDPlant_fkey">
+            <End Role="Plants" EntitySet="Plants" />
+            <End Role="OrdersPlantsMaterials" EntitySet="OrdersPlantsMaterials" />
+          </AssociationSet>
+          <AssociationSet Name="Payments_IDPaymentMethod_fkey" Association="Self.Payments_IDPaymentMethod_fkey">
+            <End Role="PaymentMethods" EntitySet="PaymentMethods" />
+            <End Role="Payments" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="Plants_IDPlantType_fkey" Association="Self.Plants_IDPlantType_fkey">
+            <End Role="PlantTypes" EntitySet="PlantTypes" />
+            <End Role="Plants" EntitySet="Plants" />
+          </AssociationSet>
+          <AssociationSet Name="Projects_IDProjectStatus_fkey" Association="Self.Projects_IDProjectStatus_fkey">
+            <End Role="ProjectStatuses" EntitySet="ProjectStatuses" />
+            <End Role="Projects" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="Projects_IDWorkers_fkey" Association="Self.Projects_IDWorkers_fkey">
+            <End Role="Workers" EntitySet="Workers" />
+            <End Role="Projects" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="Tasks_IDProject_fkey" Association="Self.Tasks_IDProject_fkey">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="Tasks" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="Workers_IDRole_fkey" Association="Self.Workers_IDRole_fkey">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Workers" EntitySet="Workers" />
+          </AssociationSet>
+          <AssociationSet Name="Tasks_IDWorkers_fkey" Association="Self.Tasks_IDWorkers_fkey">
+            <End Role="Workers" EntitySet="Workers" />
+            <End Role="Tasks" EntitySet="Tasks" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище LandscapeDesignModelContainer" CdmEntityContainer="BazaDan">
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="LandscapeDesignModel.Clients">
+              <MappingFragment StoreEntitySet="Clients">
+                <ScalarProperty Name="IDClient" ColumnName="IDClient" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="SecondName" ColumnName="SecondName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="BirthdayDate" ColumnName="BirthdayDate" />
+                <ScalarProperty Name="PassportSeria" ColumnName="PassportSeria" />
+                <ScalarProperty Name="PassportNumber" ColumnName="PassportNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Equipment">
+            <EntityTypeMapping TypeName="LandscapeDesignModel.Equipment">
+              <MappingFragment StoreEntitySet="Equipment">
+                <ScalarProperty Name="IDEquipment" ColumnName="IDEquipment" />
+                <ScalarProperty Name="IDTypeEquipment" ColumnName="IDTypeEquipment" />
+                <ScalarProperty Name="IDStatusEquipment" ColumnName="IDStatusEquipment" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EquipmentUsage">
+            <EntityTypeMapping TypeName="LandscapeDesignModel.EquipmentUsage">
+              <MappingFragment StoreEntitySet="EquipmentUsage">
+                <ScalarProperty Name="IDEquipmentUsage" ColumnName="IDEquipmentUsage" />
+                <ScalarProperty Name="IDEquipment" ColumnName="IDEquipment" />
+                <ScalarProperty Name="IDWorker" ColumnName="IDWorker" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Invoices">
+            <EntityTypeMapping TypeName="LandscapeDesignModel.Invoices">
+              <MappingFragment StoreEntitySet="Invoices">
+                <ScalarProperty Name="IDInvoice" ColumnName="IDInvoice" />
+                <ScalarProperty Name="IDOrder" ColumnName="IDOrder" />
+                <ScalarProperty Name="IDInvoiceStatus" ColumnName="IDInvoiceStatus" />
+                <ScalarProperty Name="IssueDate" ColumnName="IssueDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InvoiceStatuses">
+            <EntityTypeMapping TypeName="LandscapeDesignModel.InvoiceStatuses">
+              <MappingFragment StoreEntitySet="InvoiceStatuses">
+                <ScalarProperty Name="IDInvoiceStatus" ColumnName="IDInvoiceStatus" />
+                <ScalarProperty Name="StatusName" ColumnName="StatusName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Materials">
+            <EntityTypeMapping TypeName="LandscapeDesignModel.Materials">
+              <MappingFragment StoreEntitySet="Materials">
+                <ScalarProperty Name="IDMaterial" ColumnName="IDMaterial" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="LandscapeDesignModel.Orders">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="IDOrder" ColumnName="IDOrder" />
+                <ScalarProperty Name="IDClient" ColumnName="IDClient" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="CompletionDate" ColumnName="CompletionDate" />
+                <ScalarProperty Name="IDOrderStatus" ColumnName="IDOrderStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrdersPlantsMaterials">
+            <EntityTypeMapping TypeName="LandscapeDesignModel.OrdersPlantsMaterials">
+              <MappingFragment StoreEntitySet="OrdersPlantsMaterials">
+                <ScalarProperty Name="IDOrderPlantsMaterials" ColumnName="IDOrderPlantsMaterials" />
+                <ScalarProperty Name="IDOrder" ColumnName="IDOrder" />
+                <ScalarProperty Name="IDPlant" ColumnName="IDPlant" />
+                <ScalarProperty Name="IDMaterial" ColumnName="IDMaterial" />
+                <ScalarProperty Name="QuantityPlant" ColumnName="QuantityPlant" />
+                <ScalarProperty Name="QuantityMaterial" ColumnName="QuantityMaterial" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderStatuses">
+            <EntityTypeMapping TypeName="LandscapeDesignModel.OrderStatuses">
+              <MappingFragment StoreEntitySet="OrderStatuses">
+                <ScalarProperty Name="IDOrderStatus" ColumnName="IDOrderStatus" />
+                <ScalarProperty Name="StatusName" ColumnName="StatusName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PaymentMethods">
+            <EntityTypeMapping TypeName="LandscapeDesignModel.PaymentMethods">
+              <MappingFragment StoreEntitySet="PaymentMethods">
+                <ScalarProperty Name="IDPaymentMethod" ColumnName="IDPaymentMethod" />
+                <ScalarProperty Name="MethodName" ColumnName="MethodName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Payments">
+            <EntityTypeMapping TypeName="LandscapeDesignModel.Payments">
+              <MappingFragment StoreEntitySet="Payments">
+                <ScalarProperty Name="IDPayment" ColumnName="IDPayment" />
+                <ScalarProperty Name="IDPaymentMethod" ColumnName="IDPaymentMethod" />
+                <ScalarProperty Name="IDOrder" ColumnName="IDOrder" />
+                <ScalarProperty Name="IDClient" ColumnName="IDClient" />
+                <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Plants">
+            <EntityTypeMapping TypeName="LandscapeDesignModel.Plants">
+              <MappingFragment StoreEntitySet="Plants">
+                <ScalarProperty Name="PricePerUnit" ColumnName="PricePerUnit" />
+                <ScalarProperty Name="IDPlant" ColumnName="IDPlant" />
+                <ScalarProperty Name="IDPlantType" ColumnName="IDPlantType" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="GrowthConditions" ColumnName="GrowthConditions" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PlantTypes">
+            <EntityTypeMapping TypeName="LandscapeDesignModel.PlantTypes">
+              <MappingFragment StoreEntitySet="PlantTypes">
+                <ScalarProperty Name="IDPlantType" ColumnName="IDPlantType" />
+                <ScalarProperty Name="PlantType" ColumnName="PlantType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Projects">
+            <EntityTypeMapping TypeName="LandscapeDesignModel.Projects">
+              <MappingFragment StoreEntitySet="Projects">
+                <ScalarProperty Name="IDProject" ColumnName="IDProject" />
+                <ScalarProperty Name="IDOrder" ColumnName="IDOrder" />
+                <ScalarProperty Name="IDWorkers" ColumnName="IDWorkers" />
+                <ScalarProperty Name="IDProjectStatus" ColumnName="IDProjectStatus" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProjectStatuses">
+            <EntityTypeMapping TypeName="LandscapeDesignModel.ProjectStatuses">
+              <MappingFragment StoreEntitySet="ProjectStatuses">
+                <ScalarProperty Name="IDProjectStatus" ColumnName="IDProjectStatus" />
+                <ScalarProperty Name="StatusName" ColumnName="StatusName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reviews">
+            <EntityTypeMapping TypeName="LandscapeDesignModel.Reviews">
+              <MappingFragment StoreEntitySet="Reviews">
+                <ScalarProperty Name="IDReview" ColumnName="IDReview" />
+                <ScalarProperty Name="IDOrder" ColumnName="IDOrder" />
+                <ScalarProperty Name="IDClient" ColumnName="IDClient" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="LandscapeDesignModel.Roles">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="IDRole" ColumnName="IDRole" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StatusesEquipment">
+            <EntityTypeMapping TypeName="LandscapeDesignModel.StatusesEquipment">
+              <MappingFragment StoreEntitySet="StatusesEquipment">
+                <ScalarProperty Name="IDStatusEquipment" ColumnName="IDStatusEquipment" />
+                <ScalarProperty Name="StatusEquipment" ColumnName="StatusEquipment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tasks">
+            <EntityTypeMapping TypeName="LandscapeDesignModel.Tasks">
+              <MappingFragment StoreEntitySet="Tasks">
+                <ScalarProperty Name="IDTasks" ColumnName="IDTasks" />
+                <ScalarProperty Name="IDWorkers" ColumnName="IDWorkers" />
+                <ScalarProperty Name="IDProject" ColumnName="IDProject" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeEquipment">
+            <EntityTypeMapping TypeName="LandscapeDesignModel.TypeEquipment">
+              <MappingFragment StoreEntitySet="TypeEquipment">
+                <ScalarProperty Name="IDTypeEquipment" ColumnName="IDTypeEquipment" />
+                <ScalarProperty Name="TypesEquipment" ColumnName="TypesEquipment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Workers">
+            <EntityTypeMapping TypeName="LandscapeDesignModel.Workers">
+              <MappingFragment StoreEntitySet="Workers">
+                <ScalarProperty Name="IDWorkers" ColumnName="IDWorkers" />
+                <ScalarProperty Name="IDRole" ColumnName="IDRole" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="SecondName" ColumnName="SecondName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="BirthdayDate" ColumnName="BirthdayDate" />
+                <ScalarProperty Name="PassportSeria" ColumnName="PassportSeria" />
+                <ScalarProperty Name="PassportNumber" ColumnName="PassportNumber" />
+                <ScalarProperty Name="ExperienceYears" ColumnName="ExperienceYears" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

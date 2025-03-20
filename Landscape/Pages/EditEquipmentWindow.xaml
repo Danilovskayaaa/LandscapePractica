@@ -1,0 +1,40 @@
+﻿<Window x:Class="Landscape.Pages.EditEquipmentWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Landscape.Pages"
+        mc:Ignorable="d"
+        Title="EditEquipmentWindow" Height="300" Width="400">
+
+    <Grid Background="#F5F5F5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Text="Название:" Grid.Row="0" Grid.Column="0" Margin="10" FontWeight="Bold" FontSize="14"/>
+        <TextBox Name="NameTextBox" Grid.Row="0" Grid.Column="1" Margin="10" Height="35" Padding="10" FontSize="14" Background="#FFFFFF" BorderBrush="#B0BEC5" BorderThickness="1"/>
+        <TextBlock Text="Тип оборудования:" Grid.Row="1" Grid.Column="0" Margin="10" FontWeight="Bold" FontSize="14"/>
+        <ComboBox Name="TypeEquipmentComboBox" Grid.Row="1" Grid.Column="1" Margin="10" Height="35" FontSize="14" Background="#FFFFFF" BorderBrush="#B0BEC5" BorderThickness="1"/>
+
+        <!-- Статус оборудования -->
+        <TextBlock Text="Статус оборудования:" Grid.Row="2" Grid.Column="0" Margin="10" FontWeight="Bold" FontSize="14"/>
+        <ComboBox Name="StatusEquipmentComboBox" Grid.Row="2" Grid.Column="1" Margin="10" Height="35" FontSize="14" Background="#FFFFFF" BorderBrush="#B0BEC5" BorderThickness="1"/>
+
+        <!-- Кнопки -->
+        <StackPanel Grid.Row="3" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+            <Button Name="SaveButton" Content="Сохранить" Width="120" Height="35" Margin="5" FontSize="14" Background="#4CAF50" Foreground="White" BorderBrush="#388E3C" BorderThickness="1" Click="SaveButton_Click"/>
+            <Button Name="DeleteButton" Content="Удалить" Width="120" Height="35" Margin="5" FontSize="14" Background="#F44336" Foreground="White" BorderBrush="#D32F2F" BorderThickness="1" Click="DeleteButton_Click"/>
+            <Button Name="CancelButton" Content="Отмена" Width="120" Height="35" Margin="5" FontSize="14" Background="#9E9E9E" Foreground="White" BorderBrush="#616161" BorderThickness="1" Click="CancelButton_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
