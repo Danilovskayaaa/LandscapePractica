@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Landscape.Pages"
         mc:Ignorable="d"
+         WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
         Title="Добавление растения" Height="450" Width="400"
         Background="#f3f3f3">
 

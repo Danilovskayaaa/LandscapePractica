@@ -31,5 +31,17 @@ namespace Landscape
         {
 
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (FrmMain.NavigationService.CanGoBack)
+            {
+                FrmMain.NavigationService.GoBack();
+            }
+            else
+            {
+                MessageBox.Show("Ыернуться назад нельзя, Вы на начальной странице");
+            }
+        }
     }
 }

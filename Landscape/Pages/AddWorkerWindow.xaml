@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Landscape.Pages"
         mc:Ignorable="d"
-        Title="AddWorkerWindow" Height="350" Width="900">
+         WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
+        Title="Добавление сотрудника" Height="350" Width="900">
     <Grid Margin="20">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

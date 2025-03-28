@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Landscape.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="EquipmentPage">
+      Title="СОборудование">
 
     <Grid Background="#F5F5F5">
         <Grid.RowDefinitions>

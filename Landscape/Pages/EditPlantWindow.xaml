@@ -5,19 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Landscape.Pages"
         mc:Ignorable="d"
-        Title="EditPlantWindow" Height="450" Width="500">
+         WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
+        Title="Редактирование растения" Height="450" Width="500">
 
     <Grid Background="#F9F9F9">
         <TextBlock Text="Редактирование растения" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,20,0,30"/>
 
         <TextBlock Text="Название растения:" FontSize="16" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="20,60,0,0"/>
-        <TextBox Name="NameTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="20,90,20,0" Width="460" Height="35" FontSize="14" Padding="10" Background="#FFFFFF" BorderBrush="#B0BEC5" BorderThickness="1"/>
+        <TextBox Name="NameTextBox" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,90,0,0" Width="460" Height="45" FontSize="14" Padding="10" Background="#FFFFFF" BorderBrush="#B0BEC5" BorderThickness="1"/>
 
         <TextBlock Text="Цена за единицу:" FontSize="16" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="20,140,0,0"/>
-        <TextBox Name="PricePerUnitTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="20,170,20,0" Width="460" Height="35" FontSize="14" Padding="10" Background="#FFFFFF" BorderBrush="#B0BEC5" BorderThickness="1"/>
+        <TextBox Name="PricePerUnitTextBox" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,170,0,0" Width="460" Height="45" FontSize="14" Padding="10" Background="#FFFFFF" BorderBrush="#B0BEC5" BorderThickness="1"/>
 
         <TextBlock Text="Условия роста:" FontSize="16" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="20,220,0,0"/>
-        <TextBox Name="GrowthConditionsTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="20,250,20,0" Width="460" Height="35" FontSize="14" Padding="10" Background="#FFFFFF" BorderBrush="#B0BEC5" BorderThickness="1"/>
+        <TextBox Name="GrowthConditionsTextBox" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,250,0,0" Width="460" Height="45" FontSize="14" Padding="10" Background="#FFFFFF" BorderBrush="#B0BEC5" BorderThickness="1"/>
 
         <TextBlock Text="Тип растения:" FontSize="16" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="20,300,0,0"/>
         <ComboBox Name="PlantTypeComboBox" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="20,330,20,0" Width="460" Height="35" FontSize="14" Background="#FFFFFF" BorderBrush="#B0BEC5" BorderThickness="1"/>

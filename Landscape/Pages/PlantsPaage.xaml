@@ -14,7 +14,6 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- Верхняя панель -->
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
             <Button Content="➕ Добавить" Click="Button_Click"
                     Padding="10" FontSize="14"
@@ -26,7 +25,6 @@
                     Width="120" Height="40" Margin="5" Cursor="Hand"/>
         </StackPanel>
 
-        <!-- Список растений -->
         <ListView Name="LViewPlants" Grid.Row="1"
                   ItemsSource="{Binding Plantss}" 
                   MouseDoubleClick="PlantsListView_MouseDoubleClick"
@@ -48,7 +46,6 @@
                         <StackPanel>
                             <TextBlock Text="{Binding Name}" FontSize="18" FontWeight="Bold" Foreground="#333" HorizontalAlignment="Center"/>
 
-                            <!-- Смайлики и подписи -->
                             <StackPanel Margin="10">
                                 <TextBlock Text="🌿 Условия роста" FontWeight="Bold" Foreground="#666"/>
                                 <TextBlock Text="{Binding GrowthConditions}" Foreground="#222"/>
@@ -60,7 +57,6 @@
                                 <TextBlock Text="{Binding PricePerUnit, StringFormat='Цена: {0:C}'}" Foreground="#222"/>
                             </StackPanel>
 
-                            <!-- Смайлик для типа растения -->
                                  </StackPanel>
                     </Border>
                 </DataTemplate>

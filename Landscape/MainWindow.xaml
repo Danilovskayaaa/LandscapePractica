@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Landscape"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Ландшафтный дизайн" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
@@ -17,6 +17,7 @@
                 <ColumnDefinition Width="87*"/>
                 <ColumnDefinition Width="713*"/>
             </Grid.ColumnDefinitions>
+            <Button Margin="10,10,16,30" Content="☚ Назад" Click="Button_Click" BorderBrush="#FF1C45E3" Background="#FF1EFFBE" Foreground="Black"/>
         </Grid>
         <Frame x:Name="FrmMain" Grid.Row="1" NavigationUIVisibility="Hidden" ContentRendered="FrmMain_ContentRendered"/>
     </Grid>

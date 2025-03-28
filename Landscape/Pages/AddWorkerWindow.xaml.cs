@@ -43,7 +43,8 @@ namespace Landscape.Pages
                         {
                             while (reader.Read())
                             {
-                                var role = new { IDRole = reader.GetInt32(reader.GetOrdinal("IDRole")), RoleName = reader.GetString(reader.GetOrdinal("RoleName")) };
+                                var role = new { IDRole = reader.GetInt32(reader.GetOrdinal("IDRole")),
+                                    RoleName = reader.GetString(reader.GetOrdinal("RoleName")) };
                                 cbRole.Items.Add(new ComboBoxItem { Content = role.RoleName, Tag = role.IDRole });
                             }
                         }

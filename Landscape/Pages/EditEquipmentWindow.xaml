@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Landscape.Pages"
         mc:Ignorable="d"
-        Title="EditEquipmentWindow" Height="300" Width="400">
+         WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
+        Title="Редактирование оборудования" Height="300" Width="400">
 
     <Grid Background="#F5F5F5">
         <Grid.RowDefinitions>
@@ -22,7 +23,7 @@
         </Grid.ColumnDefinitions>
 
         <TextBlock Text="Название:" Grid.Row="0" Grid.Column="0" Margin="10" FontWeight="Bold" FontSize="14"/>
-        <TextBox Name="NameTextBox" Grid.Row="0" Grid.Column="1" Margin="10" Height="35" Padding="10" FontSize="14" Background="#FFFFFF" BorderBrush="#B0BEC5" BorderThickness="1"/>
+        <TextBox Name="NameTextBox" Grid.Row="0" Grid.Column="1" Margin="10,10,10,10" Height="35" Padding="10" FontSize="14" Background="#FFFFFF" BorderBrush="#B0BEC5" BorderThickness="1"/>
         <TextBlock Text="Тип оборудования:" Grid.Row="1" Grid.Column="0" Margin="10" FontWeight="Bold" FontSize="14"/>
         <ComboBox Name="TypeEquipmentComboBox" Grid.Row="1" Grid.Column="1" Margin="10" Height="35" FontSize="14" Background="#FFFFFF" BorderBrush="#B0BEC5" BorderThickness="1"/>
 
